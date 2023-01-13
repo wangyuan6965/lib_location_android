@@ -10,7 +10,9 @@ android {
     //ndkVersion ndk_Version
     //构建工具版本
     buildToolsVersion buildTools_Version
-
+    buildFeatures {
+        viewBinding = true
+    }
     //默认配置
     defaultConfig {
         //最小支持的Android SDK版本
@@ -18,7 +20,7 @@ android {
         //开发基于的Android SDK版本
         targetSdkVersion targetSdk_Version
         //App id
-        applicationId "priv.wangyuan.download.ui"
+        applicationId "priv.wangyuan.location.ui"
         //版本号
         versionCode 1
         //版本名称

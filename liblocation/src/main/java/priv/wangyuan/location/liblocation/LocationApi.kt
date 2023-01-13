@@ -50,12 +50,10 @@ class LocationApi private constructor() {
 
         override fun onProviderDisabled(provider: String) {
             super.onProviderDisabled(provider)
+            mListeners.keys.forEach { l ->
+                l.onLocationProviderDisabled()
+            }
         }
-
-        override fun onProviderEnabled(provider: String) {
-            super.onProviderEnabled(provider)
-        }
-
     }
 
     fun requestLocationUpdates(l : GpsLocationListener) {
@@ -108,8 +106,8 @@ class LocationApi private constructor() {
 
     companion object {
         @JvmStatic
-        fun getInstance() {
-            Holder.INSTANCE
+        fun getInstance() : LocationApi {
+            return Holder.INSTANCE
         }
     }
 }

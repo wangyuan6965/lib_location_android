@@ -9,12 +9,11 @@ import androidx.lifecycle.OnLifecycleEvent
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.multidex.MultiDex
 import com.alibaba.android.arouter.launcher.ARouter
-import priv.wangyuan.download.libdownloader.Downloader
 
 class BaseApplication : Application() {
 
     companion object {
-        const val APP_ID = "download"
+        const val APP_ID = "location"
     }
 
     override fun attachBaseContext(base: Context?) {
@@ -38,7 +37,6 @@ class BaseApplication : Application() {
                 Log.e("BaseApplication", "onAppBackground")
             }
         })
-        Downloader.getDownloader().init("download")
     }
 
     private fun initARouter() {

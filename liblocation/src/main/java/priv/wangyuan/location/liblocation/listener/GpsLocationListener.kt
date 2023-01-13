@@ -12,7 +12,7 @@ interface GpsLocationListener {
 
     }
 
-    fun onLocationChanged(location: Location) {
+    fun onLocationChanged(location: Location?) {
 
     }
 
