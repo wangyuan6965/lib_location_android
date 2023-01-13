@@ -1,0 +1,155 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    //编译使用的Android SDK版本
+    compileSdkVersion compileSdk_Version.toInteger()
+    //ndk版本
+    //ndkVersion ndk_Version
+    //构建工具版本
+    buildToolsVersion buildTools_Version
+
+    //默认配置
+    defaultConfig {
+        //最小支持的Android SDK版本
+        minSdkVersion minSdk_Version
+        //开发基于的Android SDK版本
+        targetSdkVersion targetSdk_Version
+        //App id
+        applicationId "priv.wangyuan.download.ui"
+        //版本号
+        versionCode 1
+        //版本名称
+        versionName "1.0.0"
+        //开启multiDex分包
+        multiDexEnabled true
+        //flavor dimension 它的维度就是该版本号，这样维度就是都是统一的了
+        //flavorDimensions "versionCode"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    //编译选项
+    compileOptions {
+        //指定编译.Java文件的JDK版本
+        sourceCompatibility JavaVersion.VERSION_1_8
+        //确保生成的.class文件与targetCompatibility所指定版本或者更新版本的Java虚拟机兼容
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //Kotlin配置选项
+    kotlinOptions {
+        //使用Jvm 1.8编译
+        jvmTarget = "1.8"
+        useIR = true
+    }
+    //lint检查工具配置
+    lintOptions {
+        abortOnError false  //配置错误发生后不停止gradle构建
+    }
+    //dex配置选项
+    dexOptions {
+        //声明是否对依赖的库进行dex预处理来使增量构建更快速，这个特性可能会使clean构建变慢
+        preDexLibraries true
+        //构建dex最大进程数，默认是4
+        maxProcessCount 8
+    }
+    //自定义添加
+    sourceSets {//指定资源路径，可以配置Java文件、res资源文件、manifest、assets和Jni文件夹等
+        main {
+            jniLibs.srcDirs = ['libs']//指定Jni库的文件夹
+            assets {
+                srcDirs 'src/main/assets'
+            }
+        }
+    }
+    //仓库配置
+    repositories {
+        flatDir {//定义gradle在哪些本地目录寻找依赖
+            //这里定义了当前module的libs目录
+            dirs 'libs'
+        }
+    }
+    //Apk签名文件配置
+    signingConfigs {
+        debug {
+            //debug签名文件的路径，建议放在工程中，配置相对路径
+            storeFile file("debug.keystore")
+        }
+        release {
+            keyAlias 'appfactory'
+            keyPassword '123456'
+            storeFile file("release.jks")
+            storePassword '123456'
+        }
+    }
+    //构建类型
+    buildTypes {
+        debug {
+            apkPathChange()
+            ndk {//配置Debug支持哪些架构的cpu
+                //abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86_64", "x86"
+                abiFilters "armeabi-v7a"
+            }
+            signingConfig signingConfigs.debug
+            minifyEnabled false//是否对代码进行混淆
+            shrinkResources false
+            multiDexEnabled true
+            proguardFile 'proguard.cfg'
+            multiDexKeepProguard file('multidex-config.pro')
+        }
+        release {
+            ndk {//配置Release包支持哪些架构的cpu
+                abiFilters "armeabi-v7a"
+            }
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            shrinkResources true
+            multiDexEnabled true
+            //指定混淆规则的文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //proguardFile 'proguard.cfg'
+            //multiDexKeepProguard file('multidex-config.pro')
+        }
+    }
+    aaptOptions {
+        cruncherEnabled = false
+        useNewCruncher = false
+    }
+    //测试配置项
+    testOptions {
+        unitTests { //单元测试配置参数
+            includeAndroidResources = true //包含资源文件
+        }
+    }
+    //Kotlin APT配置。配置编译时注解处理
+    kapt {
+        arguments {
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+}
+//这里是修改打包输出的apk文件名称
+def apkPathChange() {
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                //这里修改apk文件名
+                output.outputFileName = "downloader-${buildType.name}-v${versionName}.apk"
+            }
+        }
+    }
+}
+
+dependencies {
+    //kotlin
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+    //依赖libs目录下的所有jar包
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    //multi dex
+    implementation("androidx.multidex:multidex:$multidex")
+    //组件化
+    kapt("com.alibaba:arouter-compiler:$arouter_compiler")
+    implementation("com.alibaba:arouter-api:$arouter_api")
+}

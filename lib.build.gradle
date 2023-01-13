@@ -1,0 +1,60 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion compileSdk_Version.toInteger()
+    buildToolsVersion buildTools_Version
+
+    defaultConfig {
+        minSdkVersion common_minSdk_Version
+        targetSdkVersion targetSdk_Version
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    buildTypes {
+        release {
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    //自定义添加
+    sourceSets {//指定资源路径，可以配置Java文件、res资源文件、manifest、assets和Jni文件夹等
+        main {
+            jniLibs.srcDirs = ['libs']//指定Jni库的文件夹
+
+        }
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    kapt {
+        arguments {
+            arg('eventBusIndex', project.getName() + 'EventBusIndex')
+            arg("AROUTER_MODULE_NAME", project.getName())
+        }
+    }
+    repositories {
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.0")
+}
+
+

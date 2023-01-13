@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--path：需要临时授权访问的路径（.代表所有路径）-->
+<!--name：就是你给这个访问路径起个名字-->
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path
+        name="root"
+        path="."/>
+    <external-media-path
+        name="external_path_media"
+        path="."/>
+    <!--Environment.getExternalStorageDirectory()-->
+    <!-- /storage/emulated/0/-->
+    <external-path
+        name="external_path"
+        path="." />
+    <!--Environment.getExternalStorageDirectory() + "/Download/"-->
+    <!-- /storage/emulated/0/Download/-->
+    <external-path
+        name="external_path_down"
+        path="Download/" />
+    <!--context.getExternalCacheDir()-->
+    <external-cache-path
+        name="external_caches"
+        path="."/>
+    <!--context.getExternalFilesDir()-->
+    <external-files-path
+        name="external_files"
+        path="."/>
+    <!--context.getFilesDir()-->
+    <files-path
+        name="app_files"
+        path="." />
+    <!--context.getCacheDir()-->
+    <cache-path
+        name="app_caches"
+        path="."/>
+</paths>

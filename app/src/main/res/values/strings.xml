@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">location</string>
+    <string name="three_seconds">1s</string>
+    <string name="title_biz_compose">biz_compose</string>
+</resources>

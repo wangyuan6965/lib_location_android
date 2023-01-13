@@ -1,0 +1,17 @@
+apply from: "../lib.build.gradle"
+
+kapt {
+    arguments {
+        arg ("AROUTER_MODULE_NAME", project.getName())
+    }
+}
+
+dependencies {
+    implementation("com.blankj:utilcode:1.19.0")
+    implementation("me.drakeet.multitype:multitype:3.4.2")
+    //ARouter
+    implementation("com.alibaba:arouter-api:$arouter_api")
+    kapt("com.alibaba:arouter-compiler:$arouter_compiler")
+
+    implementation("com.squareup.okhttp3:okhttp:3.12.0")
+}

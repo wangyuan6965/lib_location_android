@@ -1,0 +1,33 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://www.jitpack.io' }
+        maven { url "https://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
+        maven { url 'https://developer.huawei.com/repo' }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.2.2"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        maven { url 'https://maven.aliyun.com/repository/jcenter' }
+        maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://www.jitpack.io' }
+        maven { url "https://mvn.gt.igexin.com/nexus/content/repositories/releases/"}
+        maven { url 'https://developer.huawei.com/repo' }
+    }
+
+    buildDir = new File(rootDir, "gradle-build/${path.replaceAll(':', '/')}")
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

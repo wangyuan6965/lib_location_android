@@ -1,0 +1,17 @@
+apply from: 'app.build.gradle'
+
+dependencies {
+    //AndroidX
+    implementation("androidx.appcompat:appcompat:$androidxVersion")
+    implementation("com.google.android.material:material:$materialVersion")
+    //multi dex
+    implementation("androidx.multidex:multidex:$multidex")
+    //liveData+viewModel
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
+    implementation "androidx.lifecycle:lifecycle-process:$lifecycle_version"
+    implementation("androidx.constraintlayout:constraintlayout:$constraintlayout")
+
+    implementation project(path: ':liblocation')
+
+}
