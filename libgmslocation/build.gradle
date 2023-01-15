@@ -12,4 +12,8 @@ dependencies {
     //ARouter
     implementation("com.alibaba:arouter-api:$arouter_api")
     kapt("com.alibaba:arouter-compiler:$arouter_compiler")
+
+    implementation project(":liblocation")
+    // Play Services
+    implementation 'com.google.android.gms:play-services-location:19.0.1'
 }

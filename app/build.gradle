@@ -13,5 +13,5 @@ dependencies {
     implementation("androidx.constraintlayout:constraintlayout:$constraintlayout")
 
     implementation project(path: ':liblocation')
-
+    implementation project(path: ':libgmslocation')
 }

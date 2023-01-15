@@ -1,4 +1,4 @@
-package priv.wangyuan.location.liblocation
+package priv.wangyuan.location.libgmsocation
 
 import android.Manifest
 import android.content.Context

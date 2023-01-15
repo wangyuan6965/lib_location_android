@@ -1,3 +1,4 @@
 rootProject.name = "lib_location_android"
 include ':app'
 include ':liblocation'
+include ':libgmslocation'

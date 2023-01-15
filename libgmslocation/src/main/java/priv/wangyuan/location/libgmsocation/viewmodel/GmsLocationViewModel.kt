@@ -1,16 +1,19 @@
-package priv.wangyuan.location.liblocation.viewmodel
+package priv.wangyuan.location.libgmsocation.viewmodel
 
 import android.app.Application
 import android.location.Location
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import priv.wangyuan.location.libgmsocation.GmsLocationApi
 import priv.wangyuan.location.liblocation.GeocoderApi
-import priv.wangyuan.location.liblocation.LocationApi
 import priv.wangyuan.location.liblocation.listener.GpsLocationListener
 import priv.wangyuan.location.liblocation.model.GpsAddress
+import priv.wangyuan.location.liblocation.viewmodel.LiveDataLastLocationModel
+import priv.wangyuan.location.liblocation.viewmodel.LiveDataLocationModel
+import priv.wangyuan.location.liblocation.viewmodel.LiveDataModel
 
-class LocationViewModel(application: Application) : AndroidViewModel(application) {
+class GmsLocationViewModel(application: Application) : AndroidViewModel(application) {
 
     val mLocationState = MutableLiveData<LiveDataModel<GpsAddress?>>()
 
@@ -43,12 +46,12 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
     }
 
     fun requestLocationUpdates() {
-        LocationApi.getInstance().requestLocationUpdates(mGpsLocationListener)
+        GmsLocationApi.getInstance().requestLocationUpdates(mGpsLocationListener)
     }
 
     override fun onCleared() {
         super.onCleared()
-        LocationApi.getInstance().removeLocationUpdates(mGpsLocationListener)
+        GmsLocationApi.getInstance().removeLocationUpdates(mGpsLocationListener)
     }
 
 }
