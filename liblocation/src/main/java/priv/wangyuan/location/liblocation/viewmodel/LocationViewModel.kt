@@ -1,4 +1,4 @@
-package priv.wangyuan.location.ui.viewmodel
+package priv.wangyuan.location.liblocation.viewmodel
 
 import android.app.Application
 import android.location.Location
@@ -10,9 +10,6 @@ import priv.wangyuan.location.liblocation.GmsLocationApi
 import priv.wangyuan.location.liblocation.LocationApi
 import priv.wangyuan.location.liblocation.listener.GpsLocationListener
 import priv.wangyuan.location.liblocation.model.GpsAddress
-import priv.wangyuan.location.liblocation.viewmodel.LiveDataLastLocationModel
-import priv.wangyuan.location.liblocation.viewmodel.LiveDataLocationModel
-import priv.wangyuan.location.liblocation.viewmodel.LiveDataModel
 
 class LocationViewModel(application: Application) : AndroidViewModel(application) {
 

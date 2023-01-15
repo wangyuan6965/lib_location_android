@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import priv.wangyuan.location.liblocation.viewmodel.LiveDataLastLocationModel
 import priv.wangyuan.location.liblocation.viewmodel.LiveDataLocationModel
 import priv.wangyuan.location.ui.databinding.ActivityLocationBinding
-import priv.wangyuan.location.ui.viewmodel.LocationViewModel
+import priv.wangyuan.location.liblocation.viewmodel.LocationViewModel
 
 class LocationActivity : AppCompatActivity() {
 
