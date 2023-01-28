@@ -16,8 +16,8 @@ class GpsAddress(address: Address) {
     private val countryCode: String? //国家编码
     private val countryName: String? //国家名
     private val locality: String? //省级行政区名称
-    private val adminArea: String? //市级行政区名称
-    private val subLocality: String? //区/县级行政区名称
+    private val subLocality: String? //市级行政区名称
+    private val adminArea: String? //区/县级行政区名称
     private val subAdminArea: String? //乡镇/街道级行政区名称
     private val thoroughfare: String? //道路名称
     private val subThoroughfare: String? //子道路名称
