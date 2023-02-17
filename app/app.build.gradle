@@ -137,7 +137,7 @@ def apkPathChange() {
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 //这里修改apk文件名
-                output.outputFileName = "downloader-${buildType.name}-v${versionName}.apk"
+                output.outputFileName = "${rootProject.name}-${buildType.name}-v${versionName}.apk"
             }
         }
     }
