@@ -1,5 +1,5 @@
 apply from: "../lib.build.gradle"
-
+apply from: "maven_push.gradle"
 kapt {
     arguments {
         arg ("AROUTER_MODULE_NAME", project.getName())
