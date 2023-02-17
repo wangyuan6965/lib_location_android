@@ -1,0 +1,15 @@
+apply plugin: 'maven-publish'
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                from components.release
+                groupId = "${GROUP_ID}"
+                artifactId = "${ARTIFACT_ID}"
+                version = "${VERSION}"
+                artifact "${buildDir}/gradle-build/${project.name}/output/aar/${project.name}-release.aar"
+            }
+        }
+    }
+}
