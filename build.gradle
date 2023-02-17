@@ -4,7 +4,9 @@ buildscript {
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/jcenter' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
-        maven { url 'https://www.jitpack.io' }
+        maven { url 'https://www.jitpack.io'
+            //credentials { username authToken }
+        }
         maven { url "https://mvn.gt.igexin.com/nexus/content/repositories/releases/" }
         maven { url 'https://developer.huawei.com/repo' }
     }
